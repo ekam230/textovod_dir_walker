@@ -1,7 +1,7 @@
 import os,time,signal,pathlib
 from req import send_request
 
-pause_time = 5
+pause_time = 15
 
 result = list(pathlib.Path(".").rglob("*.[tT][xX][tT]"))
 print(f'Total files find: {len(result)} files')
@@ -94,6 +94,12 @@ while len(list_files) !=0:
             list_files_status_2[-1].append(req["originality"])
             list_files_status_2[-1].append(req["text_id"])
             list_files.remove(i)
+            if i in list_files_status_0:
+                list_files_status_0.remove(i)
+            if i in list_files_status_1:
+                list_files_status_1.remove(i)
+            if i in list_files_status_3:
+                list_files_status_3.remove(i)
         if req['status'] == 0: #status 0 error
             list_files_status_0.append(i)
         if req['status'] == 1: #status 1 wait
